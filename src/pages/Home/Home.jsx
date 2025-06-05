@@ -1,9 +1,11 @@
 import React from 'react';
+import Loading from '../Shared/Loading';
 
 const Home = () => {
     return (
         <div>
-            HOme
+            <Loading />
+            <h1>Home</h1>
         </div>
     );
 };
