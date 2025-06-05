@@ -3,6 +3,8 @@ import RootLayout from "../layouts/RootLayout";
 import NotFound from "../pages/Shared/NotFound";
 import Home from "../pages/Home/Home";
 import Terms from "../pages/Shared/Terms";
+import Login from "../pages/SignIn/Login";
+import Register from "../pages/Register/Register";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
             {
                 path: '/terms',
                 Component: Terms
+            },
+            {
+                path: '/login',
+                Component: Login
+            },
+            {
+                path: '/register',
+                Component: Register
             }
         ]
     }
