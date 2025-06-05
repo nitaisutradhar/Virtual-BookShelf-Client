@@ -1,2 +1,21 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, cupcake, corporate;
+}
+
+/* DaisyUI theme override using plugin */
+@plugin "daisyui/theme" {
+  name: "virtualbookshelf";
+  default: true;
+
+  --color-primary: #0F172A;       /* Navy dark */
+  --color-secondary: #06B6D4;     /* Teal accent */
+  --color-accent: #F97316;        /* Soft orange for highlights */
+  --color-base-100: #F1F5F9;      /* Background light gray */
+  --color-neutral: #1E293B;       /* Dark text / neutral */
+  --color-info: #38BDF8;          /* Info color / hover accent */
+  --color-success: #22C55E;       /* Optional green */
+  --color-warning: #FACC15;       /* Optional yellow */
+  --color-error: #EF4444;         /* Optional red */
+}
