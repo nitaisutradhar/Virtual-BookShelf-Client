@@ -1,18 +1,21 @@
-// src/pages/Register.jsx
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { Mail, Lock, SmilePlus, Image, UserPlus } from "lucide-react";
+import { Mail, Lock, SmilePlus, Image, UserPlus, EyeOff, Eye } from "lucide-react";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
+  const { createUser, setUser, updateUser } = useAuth();
+  const [showPass, setShowPass] = useState(false);
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    photo: "",
+    photoURL: "",
     password: "",
   });
 
@@ -56,15 +59,27 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { name, email, photoURL, password } = formData;
     if (!validatePassword(formData.password)) return;
 
-    // ✅ Placeholder logic — replace with Firebase later
-    Swal.fire({
-      icon: "success",
-      title: "Registration Successful!",
-      text: `Welcome, ${formData.name}!`,
-      confirmButtonColor: "#06B6D4",
-    }).then(() => navigate("/login"));
+    // Firebase Authentication
+    createUser(email, password).then(() => {
+      updateUser({ displayName: name, photoURL: photoURL }).then(() => {
+        setUser({ ...name, displayName: name, photoURL: photoURL });
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful!",
+          text: `Welcome, ${formData.name}!`,
+          confirmButtonColor: "#06B6D4",
+        }).then(() => navigate("/login"));
+      })
+      .catch((error) => {
+        showToast(error.message, "error");
+      });
+    })
+    .catch((error) => {
+      showToast(error.message, "error")
+    });
   };
 
   const handleGoogleSignUp = () => {
@@ -83,7 +98,9 @@ const Register = () => {
           <div className="text-center">
             <SmilePlus size={48} className="text-primary mb-2" />
             <h2 className="text-2xl font-bold text-primary">Create Account</h2>
-            <p className="text-sm text-gray-500">Join Virtual Bookshelf today!</p>
+            <p className="text-sm text-gray-500">
+              Join Virtual Bookshelf today!
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4 mt-6 text-neutral">
@@ -137,17 +154,23 @@ const Register = () => {
             {/* Password */}
             <div className="form-control">
               <label className="label text-sm font-medium">Password</label>
-              <div className="flex items-center border rounded px-3 py-2 bg-background border-base-300">
+              <div className="relative flex items-center border rounded px-3 py-2 bg-background border-base-300">
                 <Lock className="w-5 h-5 text-secondary mr-2" />
                 <input
                   name="password"
-                  type="password"
+                  type={showPass ? 'text' : 'password'}
                   required
                   placeholder="Your password"
                   className="bg-transparent flex-1 outline-none"
                   value={formData.password}
                   onChange={handleChange}
                 />
+                <span
+                onClick={() => setShowPass(!showPass)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+              >
+                {showPass ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
               </div>
               <small className="text-xs text-gray-500 mt-1">
                 Must be at least 6 characters, include uppercase & lowercase.
@@ -167,7 +190,11 @@ const Register = () => {
             onClick={handleGoogleSignUp}
             className="btn btn-outline w-full text-secondary border-secondary hover:bg-secondary hover:text-white transition"
           >
-            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5 mr-2" />
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              className="w-5 h-5 mr-2"
+            />
             Sign Up with Google
           </button>
 

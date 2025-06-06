@@ -1,17 +1,42 @@
 /* eslint-disable no-unused-vars */
 
-// src/components/Navbar.jsx
 import { Link, NavLink } from "react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 //import { motion } from "motion/react"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const isLoggedIn = false; // 🔒 Replace later with actual auth state
+  const {user, logOut} = useAuth()
+  // firebase logout
+    const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logged Out",
+          text: "See you again soon!",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#6366F1",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: err.message,
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+      });
+  };
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = (
@@ -22,7 +47,7 @@ const Navbar = () => {
       <li>
         <NavLink to="/bookshelf" className="hover:text-hoverAccent duration-300">Bookshelf</NavLink>
       </li>
-      {isLoggedIn && (
+      {user && (
         <>
           <li><NavLink to="/add-book" className="hover:text-hoverAccent duration-300">Add Book</NavLink></li>
           <li><NavLink to="/my-books" className="hover:text-hoverAccent duration-300">My Books</NavLink></li>
@@ -53,8 +78,8 @@ const Navbar = () => {
 
         {/* Desktop Auth Buttons */}
         <div className="hidden lg:flex gap-2">
-          {isLoggedIn ? (
-            <button className="btn btn-sm bg-secondary text-white hover:bg-hoverAccent duration-300">Logout</button>
+          {user ? (
+            <button onClick={handleLogOut} className="btn btn-sm bg-secondary text-white hover:bg-hoverAccent duration-300">Logout</button>
           ) : (
             <Link to="/login" className="btn btn-sm btn-outline text-lightText border-lightText hover:text-hoverAccent hover:border-hoverAccent duration-300">
               Login
@@ -80,8 +105,8 @@ const Navbar = () => {
         >
           <ul className="menu menu-vertical space-y-2">{navLinks}</ul>
           <div className="mt-2">
-            {isLoggedIn ? (
-              <button className="btn btn-sm bg-secondary text-white w-full hover:bg-hoverAccent duration-300">
+            {user ? (
+              <button onClick={handleLogOut} className="btn btn-sm bg-secondary text-white w-full hover:bg-hoverAccent duration-300">
                 Logout
               </button>
             ) : (
