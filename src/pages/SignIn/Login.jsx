@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 // eslint-disable-next-line no-unused-vars
@@ -6,7 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, Lock, LogIn, Smile, EyeOff, Eye } from "lucide-react";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import { AuthContext } from "../../contexts/AuthContexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();

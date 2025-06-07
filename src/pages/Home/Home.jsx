@@ -1,11 +1,10 @@
 import React from 'react';
-import Loading from '../Shared/Loading';
+import Banner from './Banner';
 
 const Home = () => {
     return (
         <div>
-            <Loading />
-            <h1>Home</h1>
+            <Banner />
         </div>
     );
 };

@@ -90,7 +90,7 @@ const Navbar = () => {
         {/* Mobile Hamburger */}
         <div className="lg:hidden">
           <button onClick={toggleMenu}>
-            {isOpen ? <X className="text-white" /> : <Menu className="text-white" />}
+            {isOpen ? <X className="text-white cursor-pointer" /> : <Menu className="text-white cursor-pointer" />}
           </button>
         </div>
       </div>
