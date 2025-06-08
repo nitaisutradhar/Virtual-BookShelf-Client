@@ -47,7 +47,7 @@ const Banner = () => {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 w-full h-full transition-transform ease-in-out duration-6000 ${
+          className={`absolute inset-0 w-full h-full transition-discrete transform ease-in-out duration-1000 ${
             index === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >

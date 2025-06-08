@@ -6,6 +6,7 @@ import { Mail, Lock, SmilePlus, Image, UserPlus, EyeOff, Eye } from "lucide-reac
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const Register = () => {
   const { createUser, setUser, updateUser } = useAuth();
@@ -63,15 +64,30 @@ const Register = () => {
     if (!validatePassword(formData.password)) return;
 
     // Firebase Authentication
-    createUser(email, password).then(() => {
-      updateUser({ displayName: name, photoURL: photoURL }).then(() => {
-        setUser({ ...name, displayName: name, photoURL: photoURL });
-        Swal.fire({
+    createUser(email, password).then((result) => {
+      const user = result?.user;
+      
+      updateUser({ displayName: name, photoURL: photoURL }).then((result) => {
+        setUser({ ...user, displayName: name, photoURL });
+        console.log(result);
+        const userProfile ={
+          name,
+          email,
+          profile_photo: photoURL
+        }
+        axios.post(`${import.meta.env.VITE_API_URL}/users`, userProfile).then(res => {
+          console.log(res.data)
+          if(res.data.insertedId){
+            Swal.fire({
           icon: "success",
           title: "Registration Successful!",
           text: `Welcome, ${formData.name}!`,
-          confirmButtonColor: "#06B6D4",
-        }).then(() => navigate("/login"));
+          showConfirmButton: false,
+          timer: 2000,
+        }).then(() => navigate("/"));
+          }
+        })
+        
       })
       .catch((error) => {
         showToast(error.message, "error");
@@ -141,11 +157,11 @@ const Register = () => {
               <div className="flex items-center border rounded px-3 py-2 bg-background border-base-300">
                 <Image className="w-5 h-5 text-secondary mr-2" />
                 <input
-                  name="photo"
+                  name="photoURL"
                   type="url"
                   placeholder="https://your-avatar.jpg"
                   className="bg-transparent flex-1 outline-none"
-                  value={formData.photo}
+                  value={formData.photoURL}
                   onChange={handleChange}
                 />
               </div>

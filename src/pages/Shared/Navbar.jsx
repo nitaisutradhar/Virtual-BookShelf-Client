@@ -15,6 +15,7 @@ const Navbar = () => {
   const {user, logOut} = useAuth()
   // firebase logout
     const handleLogOut = () => {
+      setIsOpen(!isOpen);
     logOut()
       .then(() => {
         Swal.fire({
@@ -103,14 +104,14 @@ const Navbar = () => {
           transition={{ duration: 0.2 }}
           className="lg:hidden bg-primary px-4 pb-4"
         >
-          <ul className="menu menu-vertical space-y-2">{navLinks}</ul>
+          <ul onClick={toggleMenu} className="menu menu-vertical space-y-2">{navLinks}</ul>
           <div className="mt-2">
             {user ? (
               <button onClick={handleLogOut} className="btn btn-sm bg-secondary text-white w-full hover:bg-hoverAccent duration-300">
                 Logout
               </button>
             ) : (
-              <Link to="/login" className="btn btn-sm btn-outline text-lightText border-lightText w-full hover:text-hoverAccent hover:border-hoverAccent duration-300">
+              <Link onClick={toggleMenu} to="/login" className="btn btn-sm btn-outline text-lightText border-lightText w-full hover:text-hoverAccent hover:border-hoverAccent duration-300">
                 Login
               </Link>
             )}
