@@ -12,10 +12,10 @@ import Swal from "sweetalert2";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const {user, logOut} = useAuth()
+  const { user, logOut } = useAuth();
   // firebase logout
-    const handleLogOut = () => {
-      setIsOpen(!isOpen);
+  const handleLogOut = () => {
+    setIsOpen(!isOpen);
     logOut()
       .then(() => {
         Swal.fire({
@@ -43,18 +43,33 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink to="/" className="hover:text-hoverAccent duration-300">Home</NavLink>
+        <NavLink to="/" className="hover:text-hoverAccent duration-300">
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/bookshelf" className="hover:text-hoverAccent duration-300">Bookshelf</NavLink>
+        <NavLink
+          to="/bookshelf"
+          className="hover:text-hoverAccent duration-300"
+        >
+          Bookshelf
+        </NavLink>
       </li>
-      {user && (
-        <>
-          <li><NavLink to="/add-book" className="hover:text-hoverAccent duration-300">Add Book</NavLink></li>
-          <li><NavLink to="/my-books" className="hover:text-hoverAccent duration-300">My Books</NavLink></li>
-          <li><NavLink to="/profile" className="hover:text-hoverAccent duration-300">Profile</NavLink></li>
-        </>
-      )}
+      <li>
+        <NavLink to="/add-book" className="hover:text-hoverAccent duration-300">
+          Add Book
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/my-books" className="hover:text-hoverAccent duration-300">
+          My Books
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/profile" className="hover:text-hoverAccent duration-300">
+          Profile
+        </NavLink>
+      </li>
     </>
   );
 
@@ -67,7 +82,10 @@ const Navbar = () => {
     >
       <div className="navbar max-w-7xl mx-auto px-4 py-3">
         <div className="flex-1">
-          <Link to="/" className="text-2xl font-bold tracking-tight hover:text-hoverAccent duration-300">
+          <Link
+            to="/"
+            className="text-2xl font-bold tracking-tight hover:text-hoverAccent duration-300"
+          >
             📚 Virtual Bookshelf
           </Link>
         </div>
@@ -80,18 +98,30 @@ const Navbar = () => {
         {/* Desktop Auth Buttons */}
         <div className="hidden lg:flex gap-2">
           {user ? (
-            <button onClick={handleLogOut} className="btn btn-sm bg-secondary text-white hover:bg-hoverAccent duration-300">Logout</button>
+            <button
+              onClick={handleLogOut}
+              className="btn btn-sm bg-secondary text-white hover:bg-hoverAccent duration-300"
+            >
+              Logout
+            </button>
           ) : (
-            <Link to="/login" className="btn btn-sm btn-outline text-lightText border-lightText hover:text-hoverAccent hover:border-hoverAccent duration-300">
+            <Link
+              to="/login"
+              className="btn btn-sm btn-outline text-lightText border-lightText hover:text-hoverAccent hover:border-hoverAccent duration-300"
+            >
               Login
             </Link>
           )}
         </div>
 
         {/* Mobile Hamburger */}
-        <div className="lg:hidden">
+        <div className="lg:hidden duration-500">
           <button onClick={toggleMenu}>
-            {isOpen ? <X className="text-white cursor-pointer" /> : <Menu className="text-white cursor-pointer" />}
+            {isOpen ? (
+              <X className="text-white cursor-pointer" />
+            ) : (
+              <Menu className="text-white cursor-pointer" />
+            )}
           </button>
         </div>
       </div>
@@ -104,14 +134,23 @@ const Navbar = () => {
           transition={{ duration: 0.2 }}
           className="lg:hidden bg-primary px-4 pb-4"
         >
-          <ul onClick={toggleMenu} className="menu menu-vertical space-y-2">{navLinks}</ul>
+          <ul onClick={toggleMenu} className="menu menu-vertical space-y-2">
+            {navLinks}
+          </ul>
           <div className="mt-2">
             {user ? (
-              <button onClick={handleLogOut} className="btn btn-sm bg-secondary text-white w-full hover:bg-hoverAccent duration-300">
+              <button
+                onClick={handleLogOut}
+                className="btn btn-sm bg-secondary text-white w-full hover:bg-hoverAccent duration-300"
+              >
                 Logout
               </button>
             ) : (
-              <Link onClick={toggleMenu} to="/login" className="btn btn-sm btn-outline text-lightText border-lightText w-full hover:text-hoverAccent hover:border-hoverAccent duration-300">
+              <Link
+                onClick={toggleMenu}
+                to="/login"
+                className="btn btn-sm btn-outline text-lightText border-lightText w-full hover:text-hoverAccent hover:border-hoverAccent duration-300"
+              >
                 Login
               </Link>
             )}
