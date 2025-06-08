@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import ActiveLink from "../../components/ActiveLink";
 
 //import { motion } from "motion/react"
 
@@ -41,37 +42,24 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = (
-    <>
-      <li>
-        <NavLink to="/" className="hover:text-hoverAccent duration-300">
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/bookshelf"
-          className="hover:text-hoverAccent duration-300"
-        >
-          Bookshelf
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/add-book" className="hover:text-hoverAccent duration-300">
-          Add Book
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/my-books" className="hover:text-hoverAccent duration-300">
-          My Books
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/profile" className="hover:text-hoverAccent duration-300">
-          Profile
-        </NavLink>
-      </li>
-    </>
-  );
+  <>
+    <li>
+      <ActiveLink to="/">Home</ActiveLink>
+    </li>
+    <li>
+      <ActiveLink to="/bookshelf">Bookshelf</ActiveLink>
+    </li>
+    <li>
+      <ActiveLink to="/add-book">Add Book</ActiveLink>
+    </li>
+    <li>
+      <ActiveLink to="/my-books">My Books</ActiveLink>
+    </li>
+    <li>
+      <ActiveLink to="/profile">Profile</ActiveLink>
+    </li>
+  </>
+);
 
   return (
     <motion.nav

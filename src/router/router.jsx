@@ -5,6 +5,9 @@ import Home from "../pages/Home/Home";
 import Terms from "../pages/Shared/Terms";
 import Login from "../pages/SignIn/Login";
 import Register from "../pages/Register/Register";
+import AddBook from "../pages/AddBook/AddBook";
+import PrivateRoute from "../routes/PrivateRoute";
+
 
 const router = createBrowserRouter([
     {
@@ -28,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 Component: Register
+            },
+            {
+                path: '/add-book',
+                element: <PrivateRoute><AddBook /></PrivateRoute>
             }
         ]
     }
