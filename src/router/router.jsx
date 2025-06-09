@@ -9,6 +9,7 @@ import AddBook from "../pages/AddBook/AddBook";
 import PrivateRoute from "../routes/PrivateRoute";
 import MyBooks from "../pages/My Books/MyBooks";
 import UpdateBook from "../pages/My Books/UpdateBook";
+import Bookshelf from "../pages/BookShelf/Bookshelf";
 
 
 const router = createBrowserRouter([
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path: '/update-book/:id',
                 element: <PrivateRoute><UpdateBook /></PrivateRoute>
+            },
+            {
+                path: '/bookshelf',
+                Component: Bookshelf
             }
         ]
     }

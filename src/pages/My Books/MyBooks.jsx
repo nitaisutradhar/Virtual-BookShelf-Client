@@ -13,18 +13,18 @@ const MyBooks = () => {
   const { user } = useAuth();
   const userEmail = user.email;
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const Navigate = useNavigate()
 
   // Fetch books for this user
   useEffect(() => {
     const fetchBooks = async () => {
-        setLoading(true);
       try {
         axios
           .get(`${import.meta.env.VITE_API_URL}/my-books/${userEmail}`)
           .then((res) => {
             setBooks(res.data);
+      setLoading(false);
           })
           .catch((err) => {
             console.log(err);
@@ -32,7 +32,6 @@ const MyBooks = () => {
       } catch (error) {
         console.error("Error fetching books:", error);
       }
-      setLoading(false);
     };
     fetchBooks();
   }, [userEmail]);
