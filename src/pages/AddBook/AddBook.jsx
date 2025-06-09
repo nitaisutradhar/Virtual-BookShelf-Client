@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { BookPlus } from "lucide-react";
+import useAuth from "../../hooks/useAuth";
 
 const AddBook = () => {
-  // 🔐 Replace with auth context later
-  const userEmail = "user@example.com";
-  const userName = "John Doe";
+    const {user} = useAuth()
+  const userEmail = user.email;
+  const userName = user.displayName;
 
   const [formData, setFormData] = useState({
     book_title: "",
@@ -36,7 +37,7 @@ const AddBook = () => {
     };
 
     try {
-      const res = await fetch("https://your-api-url.com/api/books", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/books`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookData),

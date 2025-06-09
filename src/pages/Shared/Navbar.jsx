@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import ActiveLink from "../../components/ActiveLink";
+import ActiveLink from "../../routes/ActiveLink";
 
 //import { motion } from "motion/react"
 
