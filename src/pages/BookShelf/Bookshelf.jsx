@@ -3,17 +3,21 @@ import { Link } from "react-router";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { ArrowRight, Search } from "lucide-react";
+import Loading from "../Shared/Loading";
 
 const Bookshelf = () => {
   const [books, setBooks] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // Fetch all books once
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/books`)
       .then((res) => res.json())
-      .then((data) => setBooks(data))
+      .then((data) => {setBooks(data)
+        setLoading(false);
+      })
       .catch((err) => console.error("Error fetching books:", err));
   }, []);
 
@@ -28,8 +32,8 @@ const Bookshelf = () => {
 
     return matchesSearch && matchesStatus;
   });
-  console.log(filteredBooks);
 
+  if(loading) return <Loading />
 
   return (
     <motion.div
@@ -43,16 +47,23 @@ const Bookshelf = () => {
       {/* Filter Controls */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
         {/* Search Input */}
-        <label className="input input-bordered flex items-center gap-2 w-full md:w-1/2">
-          <Search className="text-secondary" size={18} />
-          <input
-            type="text"
-            placeholder="Search by title or author"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            className="w-full bg-transparent outline-none text-black"
-          />
-        </label>
+  <label className="relative w-full md:w-1/2">
+  {/* Search Icon */}
+  <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+    <Search className="text-secondary z-20" size={20} />
+  </span>
+
+  {/* Input Field */}
+  <input
+    type="text"
+    placeholder="Search by title or author"
+    value={searchText}
+    onChange={(e) => setSearchText(e.target.value)}
+    className="input input-bordered w-full pl-10 bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary transition duration-200"
+  />
+</label>
+
+
 
         {/* Dropdown Filter */}
         <select

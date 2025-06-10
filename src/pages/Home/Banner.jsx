@@ -61,7 +61,7 @@ const Banner = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="absolute inset-0 w-2/3 h-2/3 mx-auto my-auto place-items-center text-center bg-black/30 bg-opacity-60 flex flex-col justify-center px-6 md:px-16 text-white"
+            className="absolute inset-0 w-2/3 h-2/3 mx-auto my-auto place-items-center text-center bg-black/30 rounded-2xl bg-opacity-60 flex flex-col justify-center px-6 md:px-16 text-white"
           >
             <BookOpenText className="text-secondary mb-4" size={44} />
             <h2 className="text-3xl md:text-5xl font-bold mb-2">

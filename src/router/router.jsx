@@ -10,6 +10,7 @@ import PrivateRoute from "../routes/PrivateRoute";
 import MyBooks from "../pages/My Books/MyBooks";
 import UpdateBook from "../pages/My Books/UpdateBook";
 import Bookshelf from "../pages/BookShelf/Bookshelf";
+import BookDetails from "../pages/BookShelf/BookDetails";
 
 
 const router = createBrowserRouter([
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path: '/bookshelf',
                 Component: Bookshelf
+            },
+            {
+                path: "/bookshelf/:id",
+                element: <PrivateRoute><BookDetails /></PrivateRoute>
             }
         ]
     }
