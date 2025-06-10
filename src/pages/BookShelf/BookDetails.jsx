@@ -120,7 +120,7 @@ const currentUser = {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="max-w-5xl mx-auto py-10 px-4 text-gray-600"
+      className="max-w-5xl mx-auto py-10 px-4 text-base-300"
     >
       <div className="grid md:grid-cols-2 gap-8">
         <img
@@ -130,7 +130,7 @@ const currentUser = {
         />
         <div>
           <h2 className="text-3xl font-bold mb-2">{book.book_title}</h2>
-          <p className="text-sm text-gray-500">by {book.book_author}</p>
+          <p className="text-sm text-base-200">by {book.book_author}</p>
           <div className="mt-2 flex flex-wrap gap-2">
             <span className="badge badge-secondary">{book.book_category}</span>
             <span className="badge badge-outline">{book.reading_status}</span>
@@ -161,7 +161,7 @@ const currentUser = {
         {/* Add / Edit */}
         <div className="mb-6">
           <textarea
-            className="textarea textarea-bordered w-full bg-white text-gray-500"
+            className="textarea textarea-bordered w-full bg-white text-base-200"
             rows={3}
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}

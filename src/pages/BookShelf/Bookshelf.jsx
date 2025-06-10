@@ -59,7 +59,7 @@ const Bookshelf = () => {
     placeholder="Search by title or author"
     value={searchText}
     onChange={(e) => setSearchText(e.target.value)}
-    className="input input-bordered w-full pl-10 bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary transition duration-200"
+    className="input input-bordered w-full pl-10 bg-white text-base-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary transition duration-200"
   />
 </label>
 
@@ -69,7 +69,7 @@ const Bookshelf = () => {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="select select-bordered w-full md:w-60 bg-white text-gray-800"
+          className="select select-bordered w-full md:w-60 bg-white text-base-200 placeholder-gray-400"
         >
           <option value="">All Reading Status</option>
           <option>Read</option>
@@ -80,7 +80,7 @@ const Bookshelf = () => {
 
       {/* Book Cards Grid */}
       {filteredBooks.length === 0 ? (
-        <p className="text-gray-500">No books matched your search.</p>
+        <p className="text-base-200">No books matched your search.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredBooks.map((book) => (
@@ -99,11 +99,11 @@ const Bookshelf = () => {
               </figure>
               <div className="card-body">
                 <h3 className="card-title text-gray-600 text-lg font-bold">{book.book_title}</h3>
-                <p className="text-sm text-gray-500">by {book.book_author}</p>
+                <p className="text-sm text-base-200">by {book.book_author}</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   <div className="badge badge-secondary">{book.book_category}</div>
                   <div className="badge badge-outline">{book.reading_status}</div>
-                  <div className="badge badge-outline text-gray-500">Upvotes: {book.upvote || 0}</div>
+                  <div className="badge badge-outline text-base-200">Upvotes: {book.upvote || 0}</div>
                 </div>
                 <Link
                   to={`/bookshelf/${book._id}`}
