@@ -3,15 +3,20 @@ import { Link } from "react-router";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Flame } from "lucide-react";
+import Loading from "../Shared/Loading";
 
 const PopularBooks = () => {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/popular-books`)
       .then((res) => res.json())
-      .then((data) => setBooks(data));
+      .then((data) => {setBooks(data)
+        setLoading(false)
+      });
   }, []);
+  if(loading) return <Loading />
 
   return (
     <motion.div
