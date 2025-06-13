@@ -34,6 +34,7 @@ const AddBook = () => {
       user_email: userEmail,
       user_name: userName,
       upvote: 0,
+      createdAt : new Date().toISOString()
     };
 
     try {
