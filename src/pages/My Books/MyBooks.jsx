@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { Pencil, Trash2 } from "lucide-react";
-import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../Shared/Loading";
 import { useNavigate } from "react-router";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyBooks = () => {
   const { user } = useAuth();
@@ -15,13 +15,13 @@ const MyBooks = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const Navigate = useNavigate()
+  const axiosSecure = useAxiosSecure()
 
   // Fetch books for this user
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        axios
-          .get(`${import.meta.env.VITE_API_URL}/my-books/${userEmail}`)
+        axiosSecure(`/my-books/${userEmail}`)
           .then((res) => {
             setBooks(res.data);
       setLoading(false);
@@ -34,7 +34,7 @@ const MyBooks = () => {
       }
     };
     fetchBooks();
-  }, [userEmail]);
+  }, [userEmail,axiosSecure]);
 
   if (loading) {
     return <Loading />;
