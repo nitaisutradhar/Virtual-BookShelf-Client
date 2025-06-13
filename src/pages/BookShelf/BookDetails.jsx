@@ -153,7 +153,7 @@ const currentUser = {
       </div>
 
       {/* Reviews */}
-      <div className="mt-12">
+      <div className="mt-12 text-base-200">
         <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
           <MessageSquare /> Reviews
         </h3>

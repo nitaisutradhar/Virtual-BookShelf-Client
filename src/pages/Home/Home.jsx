@@ -3,6 +3,7 @@ import Banner from './Banner';
 import PopularBooks from './PopularBooks';
 import FeaturedCategoriesBooks from './FeaturedCategories/FeaturedCategoriesBooks';
 import NewlyReleasedBooks from './NewlyReleasedBooks';
+import QASection from './QASection';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <PopularBooks />
             <FeaturedCategoriesBooks />
             <NewlyReleasedBooks />
+            <QASection></QASection>
         </div>
     );
 };
