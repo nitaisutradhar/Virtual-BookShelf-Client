@@ -5,7 +5,7 @@ import FeatureBook from './FeatureBook';
 import { Sparkles } from 'lucide-react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import Loading from '../Shared/Loading';
+import Loading from '../../Shared/Loading';
 
 const FeaturedCategories = () => {
     const [featuredBooks, setFeaturedBooks] = useState([])
@@ -19,7 +19,6 @@ const FeaturedCategories = () => {
 
     const categories = [...new Set(featuredBooks.map(book => book.book_category))]
 
-    console.log(categories)
     const filteredBooks = selectedCategory ?  selectedCategory!=="All"?  featuredBooks.filter(book => book.book_category === selectedCategory)
     : featuredBooks
     : featuredBooks

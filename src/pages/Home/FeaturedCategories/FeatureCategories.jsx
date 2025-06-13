@@ -6,12 +6,6 @@ const FeatureCategories = ({onSelectCategory}) => {
     ]
     return (
          <div className="flex flex-wrap gap-2">
-            {/* <button
-            className="btn bg-primary btn-sm btn-outline"
-            onClick={() => onSelectCategory('All')}
-            >
-            All
-            </button> */}
       {categories.map((category,index) => (
         <button
           key={index}
