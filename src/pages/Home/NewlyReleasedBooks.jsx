@@ -10,16 +10,10 @@ const NewlyReleasedBooks = () => {
     const [books,setBooks] = useState([])
     
         useEffect(() => {
-            axios(`${import.meta.env.VITE_API_URL}/books`).then(res=> {setBooks(res.data)
+            axios(`${import.meta.env.VITE_API_URL}/newlyReleased`).then(res=> {setBooks(res.data)
                 setLoading(false)})
         },[])
-  // Sort by date assuming `createdAt` is an ISO string or Date
-  const sortedBooks = [...books].sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  );
-
-  const recentBooks = sortedBooks.slice(0, 5);
-
+const recentBooks = books.slice(0, 5);
   if(loading) return <Loading />
   return (
     <motion.div
