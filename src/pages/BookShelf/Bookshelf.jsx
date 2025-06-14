@@ -11,27 +11,41 @@ const Bookshelf = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [loading, setLoading] = useState(true);
 
+function useDebounce(value, delay = 500) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+const debouncedSearch = useDebounce(searchText);
+
   // Fetch all books once
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/books`)
-      .then((res) => res.json())
-      .then((data) => {setBooks(data)
-        setLoading(false);
-      })
-      .catch((err) => console.error("Error fetching books:", err));
-  }, []);
+  setLoading(true);
+  const params = new URLSearchParams();
+  if (debouncedSearch) params.append("search", debouncedSearch);
+  if (statusFilter) params.append("status", statusFilter);
 
-  // Apply search + filter
-  const filteredBooks = books.filter((book) => {
-    const matchesSearch =
-      book.book_title.toLowerCase().includes(searchText.toLowerCase()) ||
-      book.book_author.toLowerCase().includes(searchText.toLowerCase());
+  fetch(`${import.meta.env.VITE_API_URL}/books?${params.toString()}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setBooks(data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Error fetching books:", err);
+      setLoading(false);
+    });
+}, [debouncedSearch, statusFilter]);
 
-    const matchesStatus =
-      !statusFilter || book.reading_status === statusFilter;
-
-    return matchesSearch && matchesStatus;
-  });
 
   if(loading) return <Loading />
 
@@ -79,11 +93,11 @@ const Bookshelf = () => {
       </div>
 
       {/* Book Cards Grid */}
-      {filteredBooks.length === 0 ? (
+      {books.length === 0 ? (
         <p className="text-base-200">No books matched your search.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredBooks.map((book) => (
+          {books.map((book) => (
             <motion.div
               key={book._id}
               whileHover={{ scale: 1.03 }}
