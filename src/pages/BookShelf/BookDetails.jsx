@@ -12,7 +12,6 @@ import Loading from "../Shared/Loading";
 const BookDetails = () => {
   const { id } = useParams();
   const [book, setBook] = useState(null);
-  const [upvoted, setUpvoted] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [reviewText, setReviewText] = useState("");
   const [editingReviewId, setEditingReviewId] = useState(null);
@@ -46,7 +45,6 @@ const currentUser = {
       return Swal.fire("Denied", "You cannot upvote your own book.", "warning");
     }
 
-    if (upvoted) return;
 
     const res = await fetch(`${import.meta.env.VITE_API_URL}/book/${id}/upvote`, {
       method: "PATCH",
@@ -56,7 +54,6 @@ const currentUser = {
 
     if (res.ok) {
       setBook({ ...book, upvote: result.upvote });
-      setUpvoted(true);
     }
   };
 
@@ -84,6 +81,18 @@ const currentUser = {
 
     const updated = await res.json();
     console.log(updated)
+    if (updated.error)
+     return Swal.fire({
+          toast: true,
+          icon: "error",
+          title: updated.error,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+          background: "#F1F5F9",
+          color: "#1E293B",
+        });
 
     if (res.ok) {
       setReviewText("");
@@ -105,7 +114,7 @@ const currentUser = {
     });
 
     if (confirm.isConfirmed) {
-      await fetch(`https://your-api-url.com/api/reviews/${reviewId}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/reviews/${reviewId}`, {
         method: "DELETE",
       });
       setReviews(reviews.filter((r) => r._id !== reviewId));
@@ -182,7 +191,7 @@ const currentUser = {
               <div className="flex justify-between items-center mb-1">
                 <span className="font-medium">{review.user_email}</span>
                 <span className="text-xs text-gray-400">
-                  {new Date(review.created_at).toLocaleDateString()}
+                  {new Date(review.createdAt).toLocaleDateString()}
                 </span>
               </div>
               <p>{review.review_text}</p>
