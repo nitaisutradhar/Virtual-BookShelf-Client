@@ -11,6 +11,7 @@ import MyBooks from "../pages/My Books/MyBooks";
 import UpdateBook from "../pages/My Books/UpdateBook";
 import Bookshelf from "../pages/BookShelf/Bookshelf";
 import BookDetails from "../pages/BookShelf/BookDetails";
+import Profile from "../pages/Profile/Profile";
 
 
 const router = createBrowserRouter([
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
             {
                 path: "/bookshelf/:id",
                 element: <PrivateRoute><BookDetails /></PrivateRoute>
+            },
+            {
+                path: '/profile',
+                element: <PrivateRoute><Profile /></PrivateRoute>
             }
         ]
     }

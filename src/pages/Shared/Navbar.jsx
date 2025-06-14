@@ -1,18 +1,18 @@
 /* eslint-disable no-unused-vars */
 
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import ActiveLink from "../../routes/ActiveLink";
+import useAuth from "../../hooks/useAuth";
 
 //import { motion } from "motion/react"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const navigate = useNavigate();
   const { user, logOut } = useAuth();
   // firebase logout
   const handleLogOut = () => {
@@ -25,7 +25,7 @@ const Navbar = () => {
           text: "See you again soon!",
           confirmButtonText: "OK",
           confirmButtonColor: "#6366F1",
-        });
+        })
       })
       .catch((err) => {
         Swal.fire({
