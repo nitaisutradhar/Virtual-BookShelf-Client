@@ -65,7 +65,6 @@ const currentUser = {
       method: "PATCH",
     });
     const result = await res.json();
-    console.log(result)
 
     if (res.ok) {
       setBook({ ...book, upvote: result.upvote });
@@ -161,7 +160,6 @@ const currentUser = {
       const res = await axios.patch(`${import.meta.env.VITE_API_URL}/books/${id}/reading-status`, {
         reading_status: newStatus,
       });
-      console.log(res);
 
 
       if (res.data.modifiedCount > 0) {
@@ -169,8 +167,7 @@ const currentUser = {
         Swal.fire("Updated", `Reading status set to ${newStatus}`, "success");
       }
     } catch (error) {
-      console.error(error);
-      Swal.fire("Error", "Failed to update status", "error");
+      Swal.fire("Error", `Failed to update status: ${error}` , "error");
     }
   };
 
@@ -178,7 +175,6 @@ const currentUser = {
   if (!book) return <p className="text-center py-20">Loading book...</p>;
 
   const currentStatusIndex = statusSteps.indexOf(book.reading_status);
-  console.log(currentStatusIndex)
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}

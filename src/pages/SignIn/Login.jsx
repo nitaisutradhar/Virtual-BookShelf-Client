@@ -15,7 +15,7 @@ const Login = () => {
   const [showPass, setShowPass] = useState(false);
 
   // Firebase Login
-  const { signIn } = use(AuthContext);
+  const { signIn, googleSignIn } = use(AuthContext);
   const handleLogin = (e) => {
     e.preventDefault();
     signIn(email, password)
@@ -43,12 +43,31 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    Swal.fire({
-      icon: "info",
-      title: "Google Login",
-      text: "Google Login integration coming soon...",
-      confirmButtonColor: "#38BDF8",
-    });
+    googleSignIn()
+        .then(() => {
+          Swal.fire({
+              icon: 'info',
+          title: 'Login Successful!',
+          text: 'Google Login integration coming soon...',
+          showConfirmButton: false,
+          timer: 2000,
+            });
+    
+          navigate(`${location.state ? location.state : "/"}`)
+      })
+      .catch(error=>{
+        Swal.fire({
+              toast: true,
+              icon : "error",
+              title: error,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 2500,
+              timerProgressBar: true,
+              background: "#F1F5F9",
+              color: "#1E293B",
+            });
+      })
   };
 
   return (

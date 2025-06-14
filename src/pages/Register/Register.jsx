@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
 const Register = () => {
-  const { createUser, setUser, updateUser } = useAuth();
+  const { createUser, setUser, updateUser, googleSignIn } = useAuth();
   const [showPass, setShowPass] = useState(false);
 
   const navigate = useNavigate();
@@ -76,7 +76,6 @@ const Register = () => {
           profile_photo: photoURL
         }
         axios.post(`${import.meta.env.VITE_API_URL}/users`, userProfile).then(res => {
-          console.log(res.data)
           if(res.data.insertedId){
             Swal.fire({
           icon: "success",
@@ -98,9 +97,24 @@ const Register = () => {
     });
   };
 
-  const handleGoogleSignUp = () => {
-    showToast("Google Sign Up coming soon!", "info");
-  };
+    // Google SignIn
+  const handleGoogleSignUp = ()=>{
+    googleSignIn()
+    .then(() => {
+      Swal.fire({
+          icon: 'success',
+      title: 'Login Successful!',
+      text: 'Welcome back!',
+      showConfirmButton: false,
+      timer: 2000,
+        });
+
+      navigate(`${location.state ? location.state : "/"}`)
+  })
+  .catch(error=>{
+    showToast(error.message, "error");
+  })
+  }
 
   return (
     <motion.div
