@@ -5,6 +5,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recha
 import { UserCircle } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../Shared/Loading";
 
 const COLORS = ["#6366F1", "#22D3EE", "#F59E0B", "#EF4444", "#10B981"];
 
@@ -12,11 +13,14 @@ const Profile = () => {
   const { user } = useAuth();
   const [books, setBooks] = useState([]);
   const axiosSecure = useAxiosSecure()
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     if (user?.email) {
       axiosSecure(`/my-books/${user.email}`)
           .then((res) => {
+            setLoading(false);
             setBooks(res.data);
           })
           .catch((err) => {
@@ -35,7 +39,6 @@ const Profile = () => {
     value,
   }));
 
-  console.log(chartData)
     // Total upvotes
   const totalUpvotes = books.reduce((sum, book) => sum + (book.upvote || 0), 0);
 
@@ -45,6 +48,7 @@ const Profile = () => {
     { upvote: 0 }
   );
 
+  if(loading) return <Loading />
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}

@@ -6,8 +6,9 @@ import Swal from "sweetalert2";
 import { ThumbsUp, MessageSquare, Pencil, Trash2 } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../Shared/Loading";
+import axios from "axios";
 
-
+const statusSteps = ["Want-to-Read", "Reading", "Read"];
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -19,8 +20,8 @@ const BookDetails = () => {
 
 const {user } = useAuth();
 const currentUser = {
-  email: user.email,
-  name: user.displayName,
+  email: user?.email,
+  name: user?.displayName,
 };
 
   // Fetch book data
@@ -41,6 +42,20 @@ const currentUser = {
 
   // Upvote handler
   const handleUpvote = async () => {
+    if (!currentUser.email) {
+      return Swal.fire({
+        toast: true,
+        icon: "error",
+        title: "You need to login first",
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+        background: "#F1F5F9",
+        color: "#1E293B",
+      });
+    }
+
     if (currentUser.email === book.user_email) {
       return Swal.fire("Denied", "You cannot upvote your own book.", "warning");
     }
@@ -59,6 +74,20 @@ const currentUser = {
 
   // Submit or update review
   const handleSubmitReview = async () => {
+    if (!currentUser.email) {
+      return Swal.fire({
+        toast: true,
+        icon: "error",
+        title: "You need to login first",
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+        background: "#F1F5F9",
+        color: "#1E293B",
+      });
+    }
+
     if (!reviewText.trim()) return;
 
     const body = {
@@ -80,7 +109,6 @@ const currentUser = {
     });
 
     const updated = await res.json();
-    console.log(updated)
     if (updated.error)
      return Swal.fire({
           toast: true,
@@ -121,9 +149,36 @@ const currentUser = {
     }
   };
 
+  const handleStatusUpdate = async () => {
+    if (!book || book.user_email !== currentUser?.email) return;
+
+    const currentIndex = statusSteps.indexOf(book.reading_status);
+    if (currentIndex < 0 || currentIndex >= statusSteps.length - 1) return;
+
+    const newStatus = statusSteps[currentIndex + 1];
+
+    try {
+      const res = await axios.patch(`${import.meta.env.VITE_API_URL}/books/${id}/reading-status`, {
+        reading_status: newStatus,
+      });
+      console.log(res);
+
+
+      if (res.data.modifiedCount > 0) {
+        setBook((prev) => ({ ...prev, reading_status: newStatus }));
+        Swal.fire("Updated", `Reading status set to ${newStatus}`, "success");
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "Failed to update status", "error");
+    }
+  };
+
   if(loading) return <Loading />
   if (!book) return <p className="text-center py-20">Loading book...</p>;
 
+  const currentStatusIndex = statusSteps.indexOf(book.reading_status);
+  console.log(currentStatusIndex)
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -158,6 +213,42 @@ const currentUser = {
           >
             <ThumbsUp size={18} /> Upvote ({book.upvote})
           </button>
+           {/* Reading Tracker */}
+        <div className="my-6">
+          <h3 className="text-lg font-semibold mb-2">📖 Reading Tracker</h3>
+          <div className="flex items-center gap-4">
+            {statusSteps.map((status, idx) => (
+              <div key={status} className="flex items-center gap-2">
+                <div
+                  className={`w-4 h-4 rounded-full ${
+                    idx <= currentStatusIndex
+                      ? "bg-secondary"
+                      : "bg-base-300"
+                  }`}
+                ></div>
+                <span
+                  className={`text-sm ${
+                    idx === currentStatusIndex ? "font-semibold text-primary" : "text-base-200"
+                  }`}
+                >
+                  {status}
+                </span>
+                {idx < statusSteps.length - 1 && <span className="text-base-200">→</span>}
+              </div>
+            ))}
+          </div>
+
+          {/* Button to advance status */}
+          {book.user_email === currentUser?.email &&
+            currentStatusIndex < statusSteps.length - 1 && (
+              <button
+                onClick={handleStatusUpdate}
+                className="btn btn-sm btn-outline btn-primary mt-4"
+              >
+                Mark as {statusSteps[currentStatusIndex + 1]}
+              </button>
+            )}
+        </div>
         </div>
       </div>
 

@@ -55,7 +55,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/bookshelf/:id",
-                element: <PrivateRoute><BookDetails /></PrivateRoute>
+                element: <BookDetails />
             },
             {
                 path: '/profile',

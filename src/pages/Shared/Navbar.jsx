@@ -25,7 +25,9 @@ const Navbar = () => {
           text: "See you again soon!",
           confirmButtonText: "OK",
           confirmButtonColor: "#6366F1",
-        })
+        }).then(() => {
+          navigate("/");
+        });
       })
       .catch((err) => {
         Swal.fire({
