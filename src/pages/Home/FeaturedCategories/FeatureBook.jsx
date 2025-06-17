@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
+const FeatureBook = ({ filteredBooks }) => {
+  const [showAll, setShowAll] = useState(false);
 
-const FeatureBook = ({filteredBooks}) => {
-    return (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {filteredBooks.map((book) => (
-        <motion.div
+  const booksToShow = showAll ? filteredBooks : filteredBooks.slice(0, 8);
+
+  return (
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {booksToShow.map((book) => (
+          <motion.div
             key={book._id}
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
@@ -31,9 +35,22 @@ const FeatureBook = ({filteredBooks}) => {
               </div>
             </div>
           </motion.div>
-      ))}
-    </div>
-    );
+        ))}
+      </div>
+
+      {/* See More / See Less Button */}
+      {filteredBooks.length > 8 && (
+        <div className="text-center mt-6">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="btn btn-outline btn-primary"
+          >
+            {showAll ? 'See Less Books' : 'See More Books'}
+          </button>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default FeatureBook;
