@@ -54,15 +54,13 @@ const MyBooks = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/books/${id}`, {
-          method: "DELETE",
-        });
-        const result = await res.json();
-        if (res.ok) {
+        const res =await axiosSecure.delete(`/books/${id}`);
+        console.log(res);
+        if (res.data.deletedCount > 0) {
           setBooks(books.filter((book) => book._id !== id));
           Swal.fire("Deleted!", "The book has been removed.", "success");
         } else {
-          throw new Error(result.message || "Failed to delete.");
+          throw new Error(res.data.message || "Failed to delete.");
         }
       } catch (error) {
         Swal.fire("Error", error.message, "error");

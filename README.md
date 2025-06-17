@@ -13,8 +13,8 @@
 
 ## 🚀 Live Preview
 
-🔗 **Client**: [Visit Frontend](https://your-client-link.netlify.app)  
-🔗 **Server**: [Visit Backend Repo](https://github.com/your-username/virtual-bookshelf-server)
+🔗 **Client**: [Visit Frontend](https://bookshelf-faec8.web.app/)  
+🔗 **Server**: [Visit Backend Repo](https://virtual-bookshelf-server-ochre.vercel.app)
 
 ---
 

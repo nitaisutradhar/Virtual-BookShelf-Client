@@ -4,18 +4,19 @@ import { useParams, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { NotebookPen } from "lucide-react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
 
 const UpdateBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [book, setBook] = useState(null);
+  const axiosSecure = useAxiosSecure()
 
   // Fetch the book to update
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/my-book/${id}`)
-      .then((res) => res.json())
-      .then((data) => setBook(data))
+    axios(`${import.meta.env.VITE_API_URL}/my-book/${id}`)
+      .then(res => setBook(res.data))
       .catch((err) => console.error("Error loading book", err));
   }, [id]);
 
@@ -30,8 +31,8 @@ const UpdateBook = () => {
     e.preventDefault();
     const { _id, ...payload } = book;
     try {
-      axios
-        .put(`${import.meta.env.VITE_API_URL}/update-book/${id}`, payload)
+      axiosSecure
+        .put(`/update-book/${id}`, payload)
         .then((res) => {
           if (res.data.modifiedCount > 0) {
             Swal.fire({
