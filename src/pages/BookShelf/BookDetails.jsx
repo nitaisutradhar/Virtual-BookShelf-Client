@@ -149,8 +149,20 @@ const currentUser = {
   };
 
   const handleStatusUpdate = async () => {
-    if (!book || book.user_email !== currentUser?.email) return;
-
+    if (!book ) return;
+    if (book.user_email !== currentUser.email){
+      return Swal.fire({
+        toast: true,
+        icon: "error",
+        title: "You are not the owner of this book",
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+        background: "#F1F5F9",
+        color: "#1E293B",
+    })
+  }
     const currentIndex = statusSteps.indexOf(book.reading_status);
     if (currentIndex < 0 || currentIndex >= statusSteps.length - 1) return;
 
@@ -235,8 +247,7 @@ const currentUser = {
           </div>
 
           {/* Button to advance status */}
-          {book.user_email === currentUser?.email &&
-            currentStatusIndex < statusSteps.length - 1 && (
+          {currentStatusIndex < statusSteps.length - 1 && (
               <button
                 onClick={handleStatusUpdate}
                 className="btn btn-sm btn-outline btn-primary mt-4"
