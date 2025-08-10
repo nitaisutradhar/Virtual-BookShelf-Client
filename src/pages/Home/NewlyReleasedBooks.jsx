@@ -46,7 +46,7 @@ const recentBooks = books.slice(0, 5);
               <h3 className="text-lg font-semibold text-primary">{book.book_title}</h3>
               <p className="text-sm text-muted text-gray-500">by {book.book_author}</p>
               <p className="text-xs text-gray-500">Category: {book.book_category}</p>
-              <span className="badge badge-accent mt-2">🆕 Released</span>
+              <span className="badge badge-secondary mt-2">🆕 Released</span>
               <Link
                 to={`/bookshelf/${book._id}`}
                 className="btn btn-sm btn-outline btn-info mt-4 w-full"
