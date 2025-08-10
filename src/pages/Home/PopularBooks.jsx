@@ -23,7 +23,7 @@ const PopularBooks = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="max-w-7xl mx-auto px-4 py-10 text-textDark"
+      className="max-w-7xl mx-auto px-4 py-10"
     >
       <h2 className="text-3xl font-bold mb-6 flex items-center gap-2 text-primary">
         <Flame className="text-secondary" /> Popular Books
@@ -44,11 +44,11 @@ const PopularBooks = () => {
                 className="w-full h-48 object-cover"
               />
             </figure>
-            <div className="card-body text-base-200">
-              <h3 className="card-title text-lg font-bold">
+            <div className="card-body">
+              <h3 className="card-title text-lg font-bold text-primary">
                 {book.book_title}
               </h3>
-              <p className="text-sm text-gray-500">{book.book_author}</p>
+              <p className="text-sm text-base-content opacity-80">{book.book_author}</p>
               <div className="flex flex-wrap gap-2 mt-2">
                 <div className="badge badge-secondary">{book.book_category}</div>
                 <div className="badge badge-outline">🔥 {book.upvote}</div>

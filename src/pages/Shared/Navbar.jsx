@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import ActiveLink from "../../routes/ActiveLink";
 import useAuth from "../../hooks/useAuth";
+import ThemeToggle from "./ThemeToggle";
 
 //import { motion } from "motion/react"
 
@@ -84,6 +85,10 @@ const Navbar = () => {
         <div className="hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-4">{navLinks}</ul>
         </div>
+        {/* Desktop Auth Buttons & Theme Toggle */}
+        <div className="hidden lg:flex items-center gap-2">
+          <ThemeToggle />
+        </div>
 
         {/* Desktop Auth Buttons */}
         <div className="hidden lg:flex gap-2">
@@ -105,7 +110,8 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Hamburger */}
-        <div className="lg:hidden duration-500">
+        <div className="lg:hidden flex items-center justify-between duration-500">
+          <ThemeToggle />
           <button onClick={toggleMenu}>
             {isOpen ? (
               <X className="text-white cursor-pointer" />
