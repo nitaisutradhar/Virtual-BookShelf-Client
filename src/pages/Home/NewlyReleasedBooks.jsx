@@ -4,6 +4,7 @@ import { CalendarDays } from "lucide-react";
 import { useEffect, useState } from "react";
 import Loading from "../Shared/Loading";
 import axios from "axios";
+import { Link } from "react-router";
 
 const NewlyReleasedBooks = () => {
      const [loading,setLoading] = useState(true)
@@ -29,7 +30,7 @@ const recentBooks = books.slice(0, 5);
       {recentBooks.length === 0 ? (
         <p className="text-center text-muted">No new books added recently.</p>
       ) : (
-        <div className="grid justify-center sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div className="grid justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {recentBooks.map((book) => (
             <motion.div
               key={book._id}
@@ -46,6 +47,12 @@ const recentBooks = books.slice(0, 5);
               <p className="text-sm text-muted text-gray-500">by {book.book_author}</p>
               <p className="text-xs text-gray-500">Category: {book.book_category}</p>
               <span className="badge badge-accent mt-2">🆕 Released</span>
+              <Link
+                to={`/bookshelf/${book._id}`}
+                className="btn btn-sm btn-outline btn-info mt-4 w-full"
+              >
+                View Details
+              </Link>
             </motion.div>
           ))}
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { Link } from 'react-router';
 
 const FeatureBook = ({ filteredBooks }) => {
   const [showAll, setShowAll] = useState(false);
@@ -9,7 +10,7 @@ const FeatureBook = ({ filteredBooks }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
         {booksToShow.map((book) => (
           <motion.div
             key={book._id}
@@ -33,6 +34,12 @@ const FeatureBook = ({ filteredBooks }) => {
                 <div className="badge badge-secondary">{book.book_category}</div>
                 <div className="badge badge-outline">🔥 {book.upvote}</div>
               </div>
+              <Link
+                to={`/bookshelf/${book._id}`}
+                className="btn btn-sm btn-outline btn-info mt-4 w-full"
+              >
+                View Details
+              </Link>
             </div>
           </motion.div>
         ))}
