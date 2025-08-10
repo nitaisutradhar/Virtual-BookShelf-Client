@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { BookOpenText } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const slides = [
   {
@@ -30,6 +31,7 @@ const slides = [
 const Banner = () => {
   const [current, setCurrent] = useState(0);
   const total = slides.length;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -70,7 +72,7 @@ const Banner = () => {
             <p className="max-w-xl text-base md:text-lg text-gray-300">
               {slide.description}
             </p>
-            <button className="btn btn-secondary mt-6 w-fit px-6">
+            <button onClick={() => navigate("/bookshelf")} className="btn btn-secondary mt-6 w-fit px-6">
               Start Reading →
             </button>
           </motion.div>

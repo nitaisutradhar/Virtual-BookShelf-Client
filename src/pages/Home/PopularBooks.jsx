@@ -48,10 +48,10 @@ const PopularBooks = () => {
               <h3 className="card-title text-lg font-bold text-primary">
                 {book.book_title}
               </h3>
-              <p className="text-sm text-gray-500">{book.book_author}</p>
+              <p className="text-sm text-gray-600">{book.book_author}</p>
               <div className="flex flex-wrap gap-2 mt-2">
                 <div className="badge badge-secondary">{book.book_category}</div>
-                <div className="badge badge-outline">🔥 {book.upvote}</div>
+                <div className="badge badge-outline text-gray-600">🔥 {book.upvote}</div>
               </div>
               <Link
                 to={`/bookshelf/${book._id}`}

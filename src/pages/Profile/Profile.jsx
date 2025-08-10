@@ -104,8 +104,8 @@ const Profile = () => {
         {/* Book Summary */}
         <div className="bg-base-100 p-6 shadow-md rounded-xl text-base-200">
           <h3 className="text-xl font-semibold text-primary mb-4">Bookshelf Summary</h3>
-          <p className="text-lg font-medium text-info">📚 Total Books: {books.length}</p>
-          <p className="text-lg font-medium text-info mt-2">👍 Total Upvotes: {totalUpvotes}</p>
+          <p className="text-lg font-medium text-gray-600">📚 Total Books: {books.length}</p>
+          <p className="text-lg font-medium text-gray-600 mt-2">👍 Total Upvotes: {totalUpvotes}</p>
 
           {mostUpvotedBook?.book_title && (
             <div className="mt-4 p-4 bg-base-200 text-base-content rounded-lg text-sm">
