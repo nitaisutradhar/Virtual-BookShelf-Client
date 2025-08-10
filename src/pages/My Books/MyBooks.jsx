@@ -109,8 +109,8 @@ const MyBooks = () => {
                 <div className="badge badge-secondary">
                   {book.book_category}
                 </div>
-                <div className="badge badge-outline">{book.reading_status}</div>
-                <p className="mt-2 text-sm text-neutral">
+                <div className="badge badge-outline text-gray-600">{book.reading_status}</div>
+                <p className="mt-2 text-sm text-gray-600">
                   {book.book_overview}
                 </p>
                 <div className="mt-4 flex justify-between">
