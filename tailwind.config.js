@@ -25,7 +25,7 @@ export default {
           "base-100": "#F1F5F9",
           "base-content": "#1E293B", // ডিফল্ট টেক্সটের রঙ
           "base-200": "#E2E8F0",
-          "base-300": "#CBD5E1",
+          "base-300": "#000",
           "info": "#38BDF8",
           "success": "#22C55E",
           "warning": "#FACC15",
@@ -42,7 +42,7 @@ export default {
           "base-100": "#0F172A",
           "base-content": "#E2E8F0", // ডিফল্ট টেক্সটের রঙ
           "base-200": "#1E293B",
-          "base-300": "#334155",
+          "base-300": "#fff",
           "info": "#38BDF8",
           "success": "#22C55E",
           "warning": "#FACC15",

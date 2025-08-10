@@ -70,7 +70,7 @@ const Profile = () => {
 
         <div className="text-base-200">
           <h2 className="text-2xl font-bold text-primary">{user?.displayName}</h2>
-          <p className="text-sm text-textDark">{user?.email}</p>
+          <p className="text-sm text-primary">{user?.email}</p>
         </div>
       </div>
 
@@ -104,8 +104,8 @@ const Profile = () => {
         {/* Book Summary */}
         <div className="bg-base-100 p-6 shadow-md rounded-xl text-base-200">
           <h3 className="text-xl font-semibold text-primary mb-4">Bookshelf Summary</h3>
-          <p className="text-lg font-medium">📚 Total Books: {books.length}</p>
-          <p className="text-lg font-medium mt-2">👍 Total Upvotes: {totalUpvotes}</p>
+          <p className="text-lg font-medium text-info">📚 Total Books: {books.length}</p>
+          <p className="text-lg font-medium text-info mt-2">👍 Total Upvotes: {totalUpvotes}</p>
 
           {mostUpvotedBook?.book_title && (
             <div className="mt-4 p-4 bg-base-200 text-base-content rounded-lg text-sm">
@@ -120,7 +120,7 @@ const Profile = () => {
 
           <div className="mt-4 space-y-2">
             {Object.entries(categoryCounts).map(([cat, count]) => (
-              <div key={cat} className="flex justify-between border-b py-1">
+              <div key={cat} className="flex justify-between border-b py-1 border-base-300 text-gray-600">
                 <span className="capitalize">{cat}</span>
                 <span className="font-medium">{count}</span>
               </div>

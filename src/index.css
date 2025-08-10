@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake, corporate;
+  themes: light, dark, virualbookshelf --default, virtualbookshelf_dark  --prefersdark, cupcake, corporate;
 }
 
 /* DaisyUI theme override using plugin */
@@ -18,4 +18,12 @@
   --color-success: #22C55E;       /* Optional green */
   --color-warning: #FACC15;       /* Optional yellow */
   --color-error: #EF4444;         /* Optional red */
+  --color-gray-600: oklch(44.6% 0.03 256.802);
+}
+
+@plugin "daisyui/theme" {
+  name: "virtualbookshelf_dark";
+  default: false;
+
+  --color-gray-600: oklch(98.5% 0.002 247.839);      /* Light text for dark mode */
 }

@@ -26,7 +26,7 @@ const FeatureBook = ({ filteredBooks }) => {
               />
             </figure>
             <div className="card-body text-base-200">
-              <h3 className="card-title text-lg font-bold">
+              <h3 className="card-title text-primary text-lg font-bold">
                 {book.book_title}
               </h3>
               <p className="text-sm text-gray-500">{book.book_author}</p>

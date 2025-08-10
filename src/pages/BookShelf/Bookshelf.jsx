@@ -112,13 +112,13 @@ const debouncedSearch = useDebounce(searchText);
                 />
               </figure>
               <div className="card-body">
-                <h3 className="card-title text-gray-600 text-lg font-bold">{book.book_title}</h3>
-                <p className="text-sm text-base-200">by {book.book_author}</p>
+                <h3 className="card-title text-primary text-lg font-bold">{book.book_title}</h3>
+                <p className="text-sm text-gray-600">by {book.book_author}</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   <div className="badge badge-secondary">{book.book_category}</div>
-                  <div className="badge badge-outline text-base-200">{book.reading_status}</div>
+                  <div className="badge badge-outline text-gray-600">{book.reading_status}</div>
                 </div>
-                  <div className="badge badge-outline text-base-200">Upvotes: {book.upvote || 0}</div>
+                  <div className="badge badge-outline text-gray-600">Upvotes: {book.upvote || 0}</div>
                 <Link
                   to={`/bookshelf/${book._id}`}
                   className="btn btn-sm btn-outline btn-info mt-4 w-full flex items-center justify-center gap-1"

@@ -47,7 +47,7 @@ const QASection = () => {
             <div className="collapse-title text-lg font-medium text-primary">
               {item.question}
             </div>
-            <div className="collapse-content text-sm text-base-200">
+            <div className="collapse-content text-sm text-gray-600">
               <p>{item.answer}</p>
             </div>
           </div>
