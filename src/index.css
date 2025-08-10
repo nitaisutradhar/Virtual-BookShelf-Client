@@ -19,6 +19,7 @@
   --color-warning: #FACC15;       /* Optional yellow */
   --color-error: #EF4444;         /* Optional red */
   --color-gray-600: oklch(44.6% 0.03 256.802);
+  --color-gray-900: oklch(21% 0.034 264.665);
 }
 
 @plugin "daisyui/theme" {
@@ -26,4 +27,5 @@
   default: false;
 
   --color-gray-600: oklch(98.5% 0.002 247.839);      /* Light text for dark mode */
+  --color-gray-900: oklch(98.5% 0.002 247.839);      /* Light text for dark mode */
 }

@@ -128,12 +128,12 @@ const Register = () => {
           <div className="text-center">
             <SmilePlus size={48} className="text-primary mb-2" />
             <h2 className="text-2xl font-bold text-primary">Create Account</h2>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-600">
               Join Virtual Bookshelf today!
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 mt-6 text-neutral">
+          <form onSubmit={handleSubmit} className="space-y-4 mt-6 text-gray-900">
             {/* Name */}
             <div className="form-control">
               <label className="label text-sm font-medium">Name</label>
@@ -197,7 +197,7 @@ const Register = () => {
                 />
                 <span
                 onClick={() => setShowPass(!showPass)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 cursor-pointer"
               >
                 {showPass ? <EyeOff size={20} /> : <Eye size={20} />}
               </span>
@@ -213,7 +213,7 @@ const Register = () => {
             </button>
           </form>
 
-          <div className="divider text-neutral">OR</div>
+          <div className="divider text-gray-900">OR</div>
 
           {/* Google Button */}
           <button

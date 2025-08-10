@@ -125,7 +125,7 @@ const Login = () => {
                 />
                 <span
                 onClick={() => setShowPass(!showPass)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 cursor-pointer"
               >
                 {showPass ? <EyeOff size={20} /> : <Eye size={20} />}
               </span>
@@ -139,7 +139,7 @@ const Login = () => {
           </form>
 
           {/* Divider */}
-          <div className="divider text-gray-800">OR</div>
+          <div className="divider text-gray-900">OR</div>
 
           {/* Google Login */}
           <button

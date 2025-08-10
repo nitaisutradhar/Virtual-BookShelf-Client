@@ -87,11 +87,11 @@ const Navbar = () => {
         </div>
         {/* Desktop Auth Buttons & Theme Toggle */}
         <div className="hidden lg:flex items-center gap-2">
-          <ThemeToggle />
         </div>
 
         {/* Desktop Auth Buttons */}
-        <div className="hidden lg:flex gap-2">
+        <div className="hidden lg:flex items-center gap-4">
+          <ThemeToggle />
           {user ? (
             <button
               onClick={handleLogOut}

@@ -201,15 +201,15 @@ const currentUser = {
           className="w-full h-96 object-cover rounded-lg shadow"
         />
         <div>
-          <h2 className="text-3xl font-bold mb-2">{book.book_title}</h2>
-          <p className="text-sm text-base-200">by {book.book_author}</p>
-          <div className="mt-2 flex flex-wrap gap-2">
+          <h2 className="text-3xl text-primary font-bold mb-2">{book.book_title}</h2>
+          <p className="text-sm text-gray-600">by {book.book_author}</p>
+          <div className="mt-2 flex flex-wrap gap-2 text-gray-600">
             <span className="badge badge-secondary">{book.book_category}</span>
             <span className="badge badge-outline">{book.reading_status}</span>
             <span className="badge badge-outline">📄 {book.total_page} pages</span>
           </div>
-          <p className="mt-4 text-sm">{book.book_overview}</p>
-          <div className="mt-4 text-sm">
+          <p className="mt-4 text-sm text-gray-600">{book.book_overview}</p>
+          <div className="mt-4 text-sm text-gray-900">
             <p>📧 <b>{book.user_email}</b></p>
             <p>👤 <b>{book.user_name}</b></p>
           </div>
@@ -223,7 +223,7 @@ const currentUser = {
           </button>
            {/* Reading Tracker */}
         <div className="my-6">
-          <h3 className="text-lg font-semibold mb-2">📖 Reading Tracker</h3>
+          <h3 className="text-lg font-semibold mb-2 text-primary">📖 Reading Tracker</h3>
           <div className="flex items-center gap-4">
             {statusSteps.map((status, idx) => (
               <div key={status} className="flex items-center gap-2">
@@ -236,12 +236,12 @@ const currentUser = {
                 ></div>
                 <span
                   className={`text-sm ${
-                    idx === currentStatusIndex ? "font-semibold text-primary" : "text-base-200"
+                    idx === currentStatusIndex ? "font-semibold text-primary" : "text-gray-600"
                   }`}
                 >
                   {status}
                 </span>
-                {idx < statusSteps.length - 1 && <span className="text-base-200">→</span>}
+                {idx < statusSteps.length - 1 && <span className="text-gray-600">→</span>}
               </div>
             ))}
           </div>
@@ -260,8 +260,8 @@ const currentUser = {
       </div>
 
       {/* Reviews */}
-      <div className="mt-12 text-base-200">
-        <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+      <div className="mt-12 text-gray-900">
+        <h3 className="text-2xl font-bold mb-4 flex items-center gap-2 text-primary">
           <MessageSquare /> Reviews
         </h3>
 
