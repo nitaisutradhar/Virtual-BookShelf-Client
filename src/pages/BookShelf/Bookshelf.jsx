@@ -116,9 +116,9 @@ const debouncedSearch = useDebounce(searchText);
                 <p className="text-sm text-base-200">by {book.book_author}</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   <div className="badge badge-secondary">{book.book_category}</div>
-                  <div className="badge badge-outline">{book.reading_status}</div>
-                  <div className="badge badge-outline text-base-200">Upvotes: {book.upvote || 0}</div>
+                  <div className="badge badge-outline text-base-200">{book.reading_status}</div>
                 </div>
+                  <div className="badge badge-outline text-base-200">Upvotes: {book.upvote || 0}</div>
                 <Link
                   to={`/bookshelf/${book._id}`}
                   className="btn btn-sm btn-outline btn-info mt-4 w-full flex items-center justify-center gap-1"
